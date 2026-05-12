@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="module" crossorigin src="./assets/index-DOne8AlU.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-lLlgXqCI.css">
+</head>
+
+<body>
+
+<!-- ① DISCLAIMER — arranca visible con .active -->
+<div class="modal active" id="disclaimer">
+  <div class="modal-box">
+    <img src="./assets/wallet-agent-ai-DRY3I2Er.png" alt="Wallet Agent AI" class="modal-logo">
+    <h2>Disclaimer</h2>
+    <p>This dApp is experimental. Use at your own risk.<br>Always verify transactions before signing.</p>
+    <button onclick="closeDisclaimer()">Enter</button>
+  </div>
+</div>
+
+<!-- ② HOW MODAL — arranca oculto, sin .active, caja wide -->
+<div class="modal" id="howModal">
+  <div class="modal-box wide">
+    <h2 id="modalTitle"></h2>
+    <div id="modalContent"></div>
+    <button onclick="closeHow()">Close</button>
+  </div>
+</div>
+
+
+<!-- HEADER -->
+<div class="top-bar">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <img src="./assets/wallet-agent-ai-DRY3I2Er.png" alt="Wallet Agent AI" class="logo-img">
+    <span class="header-title">
+      <span class="wallet">Wallet</span>
+      <span class="agent"> Agent</span>
+      <span class="ai-small"> AI</span>
+    </span>
+  </div>
+
+
+
+
+  <div class="wallet-panel">
+    <radix-connect-button></radix-connect-button>
+    <div class="account-selector hidden" id="account-selector-container">
+      <label for="account-select">Active Account</label>
+      <select id="account-select"></select>
+    </div>
+  </div>
+</div>
+
+
+<!-- PENDING APPROVAL CARD -->
+<div id="pending-approval-card" class="pending-card disabled" onclick="checkAndOpenPending()">
+  <span id="pending-icon">🔒</span>
+  <span id="pending-text">No Pending Approvals</span>
+</div>
+
+
+
+
+
+<!-- HERO -->
+<div class="hero">
+  <h1 class="app-title">
+    <span class="wallet">Wallet</span>
+    <span class="agent"> Agent</span><br>
+    <span class="ai">AI</span>
+  </h1>
+  <p class="app-subtitle">
+    Deploy and control your on-chain wallet for agents on L1 Radix network.<br>
+    Manage assets, whitelist wallets, and automate security rules.
+  </p>
+</div>
+
+<!-- CENTRAL CARD -->
+<div class="main-card-wrapper">
+  <div class="main-card" onclick="openHow()">
+    <h3>How it Works</h3>
+    <p class="wallet-link">
+      <a href="https://wallet.radixdlt.com" target="_blank">Install a Radix Wallet</a>
+    </p>
+    <div class="main-hidden">
+
+      <div class="step">
+        <strong>1. Instantiate Contract</strong>
+        <p>Create your PolicyVault on Radix and set Name of agent and spending limits.</p>
+      </div>
+
+      <div class="step">
+        <strong>2. Deposit</strong>
+        <p>Fund your agent wallet. Always keep some XRD for fees.</p>
+      </div>
+
+      <div class="step">
+        <strong>3. Whitelist Wallets</strong>
+        <p>Add authorized destinations. The agent can only send to listed wallets.</p>
+      </div>
+
+      <div class="step">
+        <strong>4. On Agent — Install SDK</strong>
+        <code>npm install wallet-agent-ai-radix</code>
+      </div>
+
+      <div class="step">
+        <strong>5. More Info</strong>
+        <p>Click anywhere on this box to open the full guide.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ACTIONS ROW 1 -->
+<section class="grid grid-3" id="setup-row">
+  <div class="card disabled" id="instantiate-card" onclick="instantiate()">
+    <h3>① Instantiate Contract</h3>
+    <p>Create your personal agent wallet contract.</p>
+  </div>
+  <div class="card disabled" id="deposit-card" onclick="deposit()">
+    <h3>② Deposit</h3>
+    <p>Send funds into your agent wallet.</p>
+  </div>
+  <div class="card disabled" id="whitelist-card" onclick="toggleWhitelist()">
+    <h3>③ Whitelist</h3>
+    <p>Add or remove authorized wallets. Start by adding your first one.</p>
+  </div>
+</section>
+
+
+<!-- OWNER CONTROL — visible hasta desbloqueo -->
+<section class="grid grid-1" id="owner-locked">
+  <div class="card disabled" id="owner-control-card">
+    <h3>🔒 Owner Controls</h3>
+    <p>Complete 1 - Instantiate, 2 - Deposit and 3- Whitelist to unlock all advanced controls.</p>
+  </div>
+</section>
+
+
+<!-- CONTROLS ROW 1 -->
+<section class="grid grid-4 hidden" id="controls-row-1">
+  <div class="card card-sm" onclick="toggleFreeze()">
+    <h3>Freeze / Unfreeze</h3>
+    <p>Lock or restore all agent outgoing activity.</p>
+  </div>
+  <div class="card card-sm" onclick="renewBadge()">
+    <h3>Renew Badge</h3>
+    <p>Extend the agent badge validity period.</p>
+  </div>
+  <div class="card card-sm" onclick="revokeBadge()">
+    <h3>Revoke Badge</h3>
+    <p>Invalidate the current agent badge.</p>
+  </div>
+  <div class="card card-sm" onclick="issueBadge()">
+    <h3>Issue New Badge</h3>
+    <p>Mint a new agent session badge.</p>
+  </div>
+</section>
+
+<!-- CONTROLS ROW 2 -->
+<section class="grid grid-4 hidden" id="controls-row-2">
+  <div class="card card-sm" onclick="addAsset()">
+    <h3>Add Asset</h3>
+    <p>Allow a new token in the agent wallet.</p>
+  </div>
+  <div class="card card-sm" onclick="viewBalances()">
+    <h3>View Balances</h3>
+    <p>Check current agent wallet balances.</p>
+  </div>
+  <div class="card card-sm" onclick="increaseLimits()">
+    <h3>Increase Limits</h3>
+    <p>Raise spending thresholds for the agent.</p>
+  </div>
+  <div class="card card-sm" onclick="resetDailyCap()">
+    <h3>Reset Daily Cap</h3>
+    <p>Restart the daily spending counter.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="app-footer">
+  <div class="footer-column">
+    <h2>Quick Links</h2>
+    <a href="https://github.com/your-repo/README.md" target="_blank">README</a>
+    <a href="#" onclick="openAbout()">About</a>
+  </div>
+  <div class="footer-column">
+    <h2>Resources</h2>
+    <a href="#" onclick="openHow()">How it Works</a>
+    <a href="#" onclick="openTerms()">Terms & Conditions</a>
+    <a href="#" onclick="openDisclaimer()">Disclaimer</a>
+    <a href="#" onclick="openPrivacy()">Privacy Note</a>
+    <a href="https://t.me/linuxx_xrd" target="_blank">Support</a>
+  </div>
+  <div class="footer-column footer-logo">
+    <img src="./assets/Radix-logo-Dg2oknBO.png" class="footer-logo-img" alt="Radix">
+  </div>
+</footer>
+
+
+</body>
+</html>
