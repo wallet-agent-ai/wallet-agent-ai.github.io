@@ -58,7 +58,7 @@ CALL_METHOD
     `,confirmText:`Add`,onConfirm:async()=>{let e=document.getElementById(`whitelist-name`).value.trim(),t=document.getElementById(`whitelist-address`).value.trim();if(!e||!t){console.error(`Name and address required`);return}let n=Bu(e,t);console.log(`ADD WHITELIST MANIFEST:`,n),await zu(n)}})}async function Uu(){return(await Wu()).length>0}async function Wu(){let e=`
 CALL_METHOD Address("${$.activeAccount.address}") "create_proof_of_amount" Address("${$.ownerBadgeAddress}") Decimal("1") ;
 CALL_METHOD Address("${$.componentAddress}") "get_whitelist" ;
-`,t=await(await fetch(`${Q.GATEWAY_URL}/transaction/preview`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({manifest:e,start_epoch_inclusive:1,end_epoch_exclusive:100,nonce:Math.floor(Math.random()*1e9),signer_public_keys:[],notary_public_key:{key_type:`EddsaEd25519`,key_hex:`0000000000000000000000000000000000000000000000000000000000000001`},notary_is_signatory:!0,tip_percentage:0,flags:{use_free_credit:!0,assume_all_signature_proofs:!0,skip_epoch_check:!0}})})).json();console.log(`WHITELIST PREVIEW:`,t);let n=t?.receipt?.output;return console.log(`RAW OUTPUT:`,JSON.stringify(n,null,2)),!n||!n[1]?[]:(n[1]?.programmatic_json?.elements||[]).map(e=>({name:e.fields[0].value,address:e.fields[1].value}))}async function Gu(){if(!$.activeAccount||!$.ownerBadgeAddress||!$.componentAddress){console.error(`Missing APP_STATE data for removeWhitelist`);return}let e=await Wu();if(e.length===0){console.warn(`No wallets in whitelist`);return}Ru({title:`Remove from Whitelist`,content:`
+`,t=await(await fetch(`${Q.GATEWAY_URL}/transaction/preview`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({manifest:e,start_epoch_inclusive:1,end_epoch_exclusive:100,nonce:Math.floor(Math.random()*1e9),signer_public_keys:[],notary_public_key:{key_type:`EddsaEd25519`,key_hex:`0000000000000000000000000000000000000000000000000000000000000001`},notary_is_signatory:!0,tip_percentage:0,flags:{use_free_credit:!0,assume_all_signature_proofs:!0,skip_epoch_check:!0}})})).json();console.log(`WHITELIST PREVIEW:`,t);let n=t?.receipt?.output;return console.log(`RAW OUTPUT:`,JSON.stringify(n,null,2)),!n||!n[1]?[]:(n[1]?.programmatic_json?.elements||[]).map(e=>({name:e.fields[0].value,address:e.fields[1].value})).filter(e=>e.address!==$.activeAccount.address)}async function Gu(){if(!$.activeAccount||!$.ownerBadgeAddress||!$.componentAddress){console.error(`Missing APP_STATE data for removeWhitelist`);return}let e=await Wu();if(e.length===0){console.warn(`No wallets in whitelist`);return}Ru({title:`Remove from Whitelist`,content:`
       <label style="font-size:13px;color:#8b949e;">Select Wallet to Revoke</label>
       <p style="font-size:12px;color:#555;margin:2px 0 8px;">
         This wallet will no longer be allowed to receive funds from the agent.
@@ -193,7 +193,7 @@ CALL_FUNCTION
     Decimal("${e}")
     Decimal("${t}")
     Decimal("${n}")
-    Array<Tuple>()
+    Array<Tuple>(Tuple("owner", Address("${a}")))
     "${r}"
     ${i}u64
     Address("${Q.DAPP_DEFINITION}")
