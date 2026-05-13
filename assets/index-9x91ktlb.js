@@ -210,31 +210,31 @@ CALL_METHOD
         <div>
           <label style="font-size:13px;color:#8b949e;">Agent Name</label>
           <p style="font-size:12px;color:#555;margin:2px 0 6px;">A name to identify your agent.</p>
-          <input id="inst-name" type="text" placeholder="my-trading-agent"
+          <input id="inst-name" type="text" placeholder="Put your own name for Example: my-trading-agent"
             style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;box-sizing:border-box;"/>
         </div>
         <div>
           <label style="font-size:13px;color:#8b949e;">Max per Transaction</label>
           <p style="font-size:12px;color:#555;margin:2px 0 6px;">Maximum amount the agent can spend in a single transaction.</p>
-          <input id="inst-max-tx" type="number" placeholder="400" min="0" step="1"
+          <input id="inst-max-tx" type="number" placeholder="Put your value  for Example: 400" min="0" step="1"
             style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;box-sizing:border-box;"/>
         </div>
         <div>
           <label style="font-size:13px;color:#8b949e;">Multisig Threshold</label>
           <p style="font-size:12px;color:#555;margin:2px 0 6px;">Maximum the agent and owner can spend together in one TX.</p>
-          <input id="inst-multisig" type="number" placeholder="1000" min="0" step="1"
+          <input id="inst-multisig" type="number" placeholder="E.g.:1000" min="0" step="1"
             style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;box-sizing:border-box;"/>
         </div>
         <div>
           <label style="font-size:13px;color:#8b949e;">Daily Cap</label>
           <p style="font-size:12px;color:#555;margin:2px 0 6px;">Maximum total spending allowed per day.</p>
-          <input id="inst-daily" type="number" placeholder="10000" min="0" step="1"
+          <input id="inst-daily" type="number" placeholder="E.g. :10000" min="0" step="1"
             style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;box-sizing:border-box;"/>
         </div>
         <div>
           <label style="font-size:13px;color:#8b949e;">Badge Duration (days)</label>
           <p style="font-size:12px;color:#555;margin:2px 0 6px;">How many days the agent badge stays valid.</p>
-          <input id="inst-days" type="number" placeholder="30" min="1" step="1"
+          <input id="inst-days" type="number" placeholder="E.g. :30" min="1" step="1"
             style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;box-sizing:border-box;"/>
         </div>
       </div>
