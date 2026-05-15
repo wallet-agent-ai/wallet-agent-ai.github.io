@@ -419,15 +419,25 @@ CALL_METHOD
       <p style="font-size:12px;color:#555;">
         ⚠️ Only works if at least 24 hours (288 epochs) have passed since the last reset.
       </p>
-    `,confirmText:`Reset Daily Cap`,onConfirm:async()=>{let e=hd();console.log(`RESET DAILY CAP MANIFEST:`,e),await Vu(e)}})}async function _d(){return((await(await fetch(`${Z.GATEWAY_URL}/state/entity/details`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({addresses:[Q.componentAddress],aggregation_level:`Vault`,opt_ins:{explicit_metadata:[`name`,`symbol`]}})})).json())?.items?.[0]?.fungible_resources?.items||[]).map(e=>{let t=e.explicit_metadata?.items||[];return{name:t.find(e=>e.key===`name`)?.value?.typed?.value||`Unknown`,symbol:t.find(e=>e.key===`symbol`)?.value?.typed?.value||`???`,amount:parseFloat(e.vaults?.items?.[0]?.amount||0).toFixed(4)}})}async function vd(){if(!Q.componentAddress){console.error(`Missing componentAddress for viewBalances`);return}let e=await _d();$({title:`Agent Wallet Balances`,hideConfirm:!0,content:`
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        ${e.length>0?e.map(e=>`
+    `,confirmText:`Reset Daily Cap`,onConfirm:async()=>{let e=hd();console.log(`RESET DAILY CAP MANIFEST:`,e),await Vu(e)}})}async function _d(){return((await(await fetch(`${Z.GATEWAY_URL}/state/entity/details`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({addresses:[Q.componentAddress],aggregation_level:`Vault`,opt_ins:{explicit_metadata:[`name`,`symbol`]}})})).json())?.items?.[0]?.fungible_resources?.items||[]).map(e=>{let t=e.explicit_metadata?.items||[];return{name:t.find(e=>e.key===`name`)?.value?.typed?.value||`Unknown`,symbol:t.find(e=>e.key===`symbol`)?.value?.typed?.value||`???`,amount:parseFloat(e.vaults?.items?.[0]?.amount||0).toFixed(4)}})}async function vd(){if(!Q.componentAddress){console.error(`Missing componentAddress for viewBalances`);return}let e=await _d(),t=e.length>0?e.map(e=>`
         <div style="display:flex;justify-content:space-between;align-items:center;
           padding:10px;border-radius:8px;background:#0a0f1a;border:1px solid #1f2937;">
           <span style="font-size:13px;color:#8b949e;">${e.symbol} — ${e.name}</span>
           <span style="font-size:14px;font-weight:600;color:#276ff5;">${e.amount}</span>
         </div>
-      `).join(``):`<p style="color:#555;font-size:13px;text-align:center;">No assets found in agent wallet.</p>`}
+      `).join(``):`<p style="color:#555;font-size:13px;text-align:center;">No assets found in agent wallet.</p>`,n=`${Z.GATEWAY_URL}/component/${Q.componentAddress}`;$({title:`Agent Wallet Balances`,hideConfirm:!0,content:`
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        ${t}
+        <div style="margin-top:8px;padding:10px;border-radius:8px;background:#0a0f1a;border:1px solid #1f2937;">
+          <p style="font-size:11px;color:#555;margin:0 0 4px;">Component Address</p>
+          <p style="font-size:11px;font-family:monospace;color:#8b949e;margin:0;word-break:break-all;">
+            ${Q.componentAddress}
+          </p>
+          <a href="${n}" target="_blank"
+            style="display:inline-block;margin-top:8px;font-size:12px;color:#276ff5;text-decoration:none;">
+            View on Radix Dashboard ↗
+          </a>
+        </div>
       </div>
     `})}function yd(){return`
 CALL_METHOD
