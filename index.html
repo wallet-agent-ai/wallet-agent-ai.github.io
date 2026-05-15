@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script type="module" crossorigin src="/assets/index-DiybDhFm.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-lLlgXqCI.css">
+  <script type="module" crossorigin src="/assets/index-kUrqYG3T.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CohGE80Q.css">
 </head>
 
 <body>
@@ -84,25 +84,25 @@
       <a href="https://wallet.radixdlt.com" target="_blank">Install a Radix Wallet</a>
     </p>
     <div class="main-hidden">
-
+      
       <div class="step">
-        <strong>1. Instantiate Contract</strong>
+        <strong>1. On Agent — Install SDK</strong>
+        <code>npm install wallet-agent-ai-radix</code>
+      </div>
+        
+      <div class="step">
+        <strong>2. Instantiate Contract</strong>
         <p>Create your PolicyVault on Radix and set Name of agent and spending limits.</p>
       </div>
 
       <div class="step">
-        <strong>2. Deposit</strong>
+        <strong>3. Deposit</strong>
         <p>Fund your agent wallet. Always keep some XRD for fees.</p>
       </div>
 
       <div class="step">
-        <strong>3. Whitelist Wallets</strong>
+        <strong>4. Whitelist Wallets</strong>
         <p>Add authorized destinations. The agent can only send to listed wallets.</p>
-      </div>
-
-      <div class="step">
-        <strong>4. On Agent — Install SDK</strong>
-        <code>npm install wallet-agent-ai-radix</code>
       </div>
 
       <div class="step">
@@ -116,6 +116,7 @@
 
 
 <!-- ACTIONS ROW 1 -->
+<!-- SETUP ROW -->
 <section class="grid grid-3" id="setup-row">
   <div class="card disabled" id="instantiate-card" onclick="instantiate()">
     <h3>① Instantiate Contract</h3>
@@ -127,9 +128,10 @@
   </div>
   <div class="card disabled" id="whitelist-card" onclick="toggleWhitelist()">
     <h3>③ Whitelist</h3>
-    <p>Add or remove destinations wallets.</p>
+    <p>Add or remove destination wallets.</p>
   </div>
 </section>
+
 
 
 <!-- OWNER CONTROL — visible hasta desbloqueo -->
@@ -142,31 +144,26 @@
 
 
 <!-- CONTROLS ROW 1 -->
-<section class="grid grid-4 hidden" id="controls-row-1">
-  <div class="card card-sm" onclick="toggleFreeze()">
-    <h3>Freeze / Unfreeze</h3>
-    <p>Lock or restore all agent outgoing activity.</p>
-  </div>
-  <div class="card card-sm" onclick="renewBadge()">
-    <h3>Renew Badge</h3>
-    <p>Extend the agent badge validity period.</p>
-  </div>
+<!-- CONTROLS ROW 1 -->
+<section class="grid grid-3 hidden" id="controls-row-1">
   <div class="card card-sm" onclick="revokeBadge()">
-    <h3>Revoke Badge</h3>
+    <h3>🔴 Revoke Badge</h3>
     <p>Invalidate the current agent badge.</p>
   </div>
-  <div class="card card-sm" onclick="issueBadge()">
-    <h3>Issue New Badge</h3>
-    <p>Mint a new agent session badge.</p>
+  <div class="card card-sm" id="emergency-card" onclick="openEmergencyModal()">
+    <h3>🔴 Emergency</h3>
+    <p>Freeze, unfreeze or withdraw all funds from the agent wallet.</p>
   </div>
-</section>
-
-<!-- CONTROLS ROW 2 -->
-<section class="grid grid-4 hidden" id="controls-row-2">
   <div class="card card-sm" onclick="addAsset()">
     <h3>Add Asset</h3>
     <p>Allow a new token in the agent wallet.</p>
   </div>
+</section>
+
+
+<!-- CONTROLS ROW 2 -->
+<!-- CONTROLS ROW 2 -->
+<section class="grid grid-3 hidden" id="controls-row-2">
   <div class="card card-sm" onclick="viewBalances()">
     <h3>View Balances</h3>
     <p>Check current agent wallet balances.</p>
