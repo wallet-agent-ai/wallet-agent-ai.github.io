@@ -1,0 +1,78 @@
+<div class="legal-doc">
+  <h2>Wallet Agent AI</h2>
+  <p>
+    A smart contract system deployed on Radix network that gives your AI agent 
+    a programmable wallet with verifiable on-chain rules, spending limits, and permissions. 
+    Designed for security, automation and advanced DeFi use cases.
+  </p>
+
+  <div class="flow-box">
+Owner install the SDK for his agent → init it
+↓
+Owner deploys PolicyVault → funds it → configures rules
+↓
+Receives 2 badges: Agent session badge (AWB) and PolicyVault Owner badge (PVOB) 
+↓
+Agent calls wallet.transfer() / wallet.swap() / wallet.createConditionalOrder()
+↓
+PolicyVault verifies: valid badge + within spend limit + destination in whitelist
+↓
+Transaction executes on Radix — fully auditable on-chain
+  </div>
+  
+  <h3 style="margin-top:24px;color:#276ff5;">On Agent</h3>
+
+  <div class="how-step">
+    <h3>1. Install SDK</h3>
+    <p>
+      Install the Wallet Agent AI SDK in your agent project to enable 
+      communication with the PolicyVault contract.
+    </p>
+    <div class="flow-box">npm install agent-wallet-radix</div>
+    <p>Second inicialite it to create agent notarized account
+    </p>
+    <div class="flow-box">npx agent-wallet init </div>
+    <p>It create a accout and give you seeds that could be imported on radix-wallet account if you want and a pass to encrypt the pass.Feed the account with
+    some XRD to fees.These account only is used as notarized account .The real account of the agent is the component that will be instantiate in further step.  
+    </p>
+
+  </div>
+
+  <h3 style="margin-top:24px;color:#276ff5;">On Radix Network</h3>
+
+  <div class="how-step">
+    <h3>1. Instantiate Contract</h3>
+    <p>
+      Connect your Radix wallet to this app and create your personal PolicyVault contract.You need the agent-notarized account created in the SDK installation.
+      Without these FIRST step the radix part dont work. 
+      You will set the spending limits, daily cap, and badge duration for your agent. 
+    </p>
+  </div>
+
+  <div class="how-step">
+    <h3>2. Deposit</h3>
+    <p>
+      Fund your agent wallet by depositing tokens into the PolicyVault.The component that define what the agent can or not do.  
+      The agent will only be able to spend what you deposit here. 
+      XRD is required for transaction fees — always keep some available, on the Vault and on the AgentNotarized Account.
+    </p>
+  </div>
+
+  <div class="how-step">
+    <h3>3. Whitelist Wallets</h3>
+    <p>
+      Add at least one authorized destination wallet. 
+      The agent can only send funds to wallets on this list — 
+      any transfer to an unlisted address will be rejected by the contract.
+    </p>
+  </div>
+
+  <div class="how-step">
+    <h3>4.🔒 Owner Controls</h3>
+    <p>
+      Now you can control other advanceds settings of aggent wallet. 
+      Each of the now avalaibles boxes have his own self explanations. 
+    </p>
+  </div>
+
+</div>
