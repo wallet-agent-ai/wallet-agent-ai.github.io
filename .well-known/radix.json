@@ -1,7 +1,9 @@
 {
   "dApps": [
     {
-      "dAppDefinitionAddress": "account_rdx12x0tunkp3gw94cfer06a067sf87xzrntdnzsxtkfk4hkz6xwj0jh98"
+      "dAppDefinitionAddress": "account_rdx12x0tunkp3gw94cfer06a067sf87xzrntdnzsxtkfk4hkz6xwj0jh98",
+       "iconUrl": "https://wallet-agent-ai.github.io/logo_512x512.png",
+      "name": "Wallet Agent AI"
     }
   ]
 }
