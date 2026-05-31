@@ -1,9 +1,5 @@
-import {
-  RadixDappToolkit,
-  DataRequestBuilder,
-} from "@radixdlt/radix-dapp-toolkit";
-
-import { CONFIG } from "./config.js";
+import "./styles.css";
+import { rdt } from "./rdt.js";
 import { renderAccountSelector } from "./utils/accountSelector.js";
 import { APP_STATE } from "./utils/state.js";
 import { accountHasAgent } from "./utils/nft.js"; 
@@ -132,27 +128,7 @@ window.closeHow = closeHow;
 window.closeDisclaimer = closeDisclaimer;
 window.closeModal = closeHow; 
 
-// =========================
-// INIT TOOLKIT
-// =========================
-
-export const rdt = RadixDappToolkit({
-  dAppDefinitionAddress: CONFIG.DAPP_DEFINITION,
-
-  networkId: CONFIG.NETWORK_ID,
-
-  applicationName: CONFIG.APP_NAME,
-
-  applicationVersion: CONFIG.APP_VERSION,
-});
-
-// Pedir cuentas al usuario
-rdt.walletApi.setRequestData(
-  DataRequestBuilder.accounts().atLeast(1)
-);
-
-
-// Pedir datos al usuario
+// Wallet connection updates
 rdt.walletApi.walletData$.subscribe((walletData) => {
   APP_STATE.walletData = walletData; 
   if (

@@ -1,5 +1,5 @@
 // actions/radix.js
-import { rdt } from "../main.js";
+import { rdt } from "../rdt.js";
 import { updateAccountState } from "../utils/accountSelector.js";
 import { APP_STATE } from "../utils/state.js";
 

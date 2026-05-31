@@ -1,5 +1,26 @@
 # WEB for wallet-agent-ai
-These is the web part of the wallet agent ai radix project.
+
+Web dApp for [Wallet Agent AI](https://wallet-agent-ai.github.io/) on Radix.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Deploy to GitHub Pages
+
+Pushes to `main` deploy automatically via GitHub Actions (build + `gh-pages` branch).
+
+Manual deploy:
+
+```bash
+npm run build
+npm run deploy
+```
+
+Ensure the repository **Pages** source is set to the `gh-pages` branch (root).
 
 ## Support this project
 

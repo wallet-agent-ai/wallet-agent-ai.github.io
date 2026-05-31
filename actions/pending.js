@@ -1,6 +1,6 @@
 import { CONFIG } from "../config.js";
 import { APP_STATE } from "../utils/state.js";
-import { openActionModal } from "../utils/modal.js";
+import { openActionModal, closeHow } from "../utils/modal.js";
 import { sendTransaction } from "./radix.js";
 
 export async function getPendingTransfer() {

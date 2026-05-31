@@ -63,6 +63,48 @@ async function getAgentBadgeFromNotarizer(notarizerAccount) {
   return null;
 }
 
+async function applyPVOB(resource, component) {
+  APP_STATE.ownerBadgeAddress = resource.resource_address;
+  APP_STATE.componentAddress = component;
+
+  const notarizerAccount = await getComponentState(component);
+  if (!notarizerAccount) return;
+
+  APP_STATE.notarizerAccount = notarizerAccount;
+  const badge = await getAgentBadgeFromNotarizer(notarizerAccount);
+  if (!badge) return;
+
+  APP_STATE.agentBadgeAddress = badge.resourceAddress;
+  APP_STATE.agentBadgeVaultAddress = badge.vaultAddress;
+  APP_STATE.agentBadgeLocalId = badge.localId;
+}
+
+function isOwnerBadge(resource, { requireAmount }) {
+  const metadata = resource.explicit_metadata?.items || [];
+  const name = getMeta(metadata, "name");
+  const symbol = getMeta(metadata, "symbol");
+  const dapps = getMetaArray(metadata, "dapp_definitions");
+  const component = getMeta(metadata, "component");
+
+  if (
+    name !== CONFIG.OWNER_BADGE_NAME ||
+    symbol !== CONFIG.OWNER_BADGE_SYMBOL ||
+    !dapps.includes(CONFIG.DAPP_DEFINITION) ||
+    !component
+  ) {
+    return null;
+  }
+
+  if (requireAmount) {
+    const amount = resource.vaults?.items?.[0]?.amount || "0";
+    if (parseFloat(amount) !== 1) return null;
+  } else if (!resource.vaults?.items?.length) {
+    return null;
+  }
+
+  return component;
+}
+
 export async function accountHasAgent(accountAddress) {
   try {
     const response = await fetch(`${CONFIG.GATEWAY_URL}/state/entity/details`, {
@@ -79,54 +121,27 @@ export async function accountHasAgent(accountAddress) {
     });
 
     const data = await response.json();
-    const fungibles = data?.items?.[0]?.fungible_resources?.items || [];
+    const item = data?.items?.[0];
+    const fungibles = item?.fungible_resources?.items || [];
+    const nonFungibles = item?.non_fungible_resources?.items || [];
 
-    let foundPVOB = false;
-
-    // ── PVOB ──
     for (const resource of fungibles) {
-      const metadata  = resource.explicit_metadata?.items || [];
-      const name      = getMeta(metadata, "name");
-      const symbol    = getMeta(metadata, "symbol");
-      const dapps     = getMetaArray(metadata, "dapp_definitions");
-      const amount    = resource.vaults?.items?.[0]?.amount || "0";
-      const component = getMeta(metadata, "component");
-
-      const valid =
-        name   === CONFIG.OWNER_BADGE_NAME   &&
-        symbol === CONFIG.OWNER_BADGE_SYMBOL &&
-        dapps.includes(CONFIG.DAPP_DEFINITION) &&
-        parseFloat(amount) === 1;
-
-      if (valid) {
-        APP_STATE.ownerBadgeAddress = resource.resource_address;
-        APP_STATE.componentAddress  = component;
-        foundPVOB = true;
-        console.log("PVOB found:", resource.resource_address);
-        console.log("componentAddress:", component);
-
-        // ── Leer notarizer_account del estado del componente ──
-        const notarizerAccount = await getComponentState(component);
-        if (notarizerAccount) {
-          APP_STATE.notarizerAccount = notarizerAccount;
-          console.log("notarizerAccount:", notarizerAccount);
-
-          // ── Buscar AWB en la cuenta notarizadora ──
-          const badge = await getAgentBadgeFromNotarizer(notarizerAccount);
-          if (badge) {
-            APP_STATE.agentBadgeAddress  = badge.resourceAddress;
-            APP_STATE.agentBadgeVaultAddress = badge.vaultAddress;
-            APP_STATE.agentBadgeLocalId  = badge.localId;
-            console.log("AWB found:", badge.resourceAddress, "vault:", badge.vaultAddress);
-          }
-        }
+      const component = isOwnerBadge(resource, { requireAmount: true });
+      if (component) {
+        await applyPVOB(resource, component);
+        return true;
       }
     }
 
-    console.log("Detection result — PVOB:", foundPVOB);
-    console.log("APP_STATE:", { ...APP_STATE });
-    return foundPVOB;
+    for (const resource of nonFungibles) {
+      const component = isOwnerBadge(resource, { requireAmount: false });
+      if (component) {
+        await applyPVOB(resource, component);
+        return true;
+      }
+    }
 
+    return false;
   } catch (err) {
     console.error("NFT DETECTION ERROR:", err);
     return false;

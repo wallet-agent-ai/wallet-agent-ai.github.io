@@ -222,8 +222,7 @@ onConfirm: async () => {
           </p>
         </div>
       `,
-      confirmText: null,
-      onConfirm: () => {},
+      hideConfirm: true,
     });
 
     const details = await getInstantiateDetails(intentHash);

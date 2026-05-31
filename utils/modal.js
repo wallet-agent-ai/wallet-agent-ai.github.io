@@ -57,51 +57,6 @@ export function openActionModal({ title, content, confirmText = "Confirm", onCon
   }
 }
 
-
-// modal para deposit
-export async function deposit() {
-  if (!APP_STATE.activeAccount || !APP_STATE.ownerBadgeAddress || !APP_STATE.componentAddress) {
-    console.error("Missing APP_STATE data for deposit");
-    return;
-  }
-
-  const tokens = await getAccountTokens();
-
-  const options = tokens.map(t => `
-    <option value="${t.address}">
-      ${t.symbol} — ${t.name} (${parseFloat(t.amount).toFixed(2)} available)
-    </option>
-  `).join("");
-
-  openActionModal({
-    title: "Deposit to Agent Wallet",
-    content: `
-      <label>Select Token</label>
-      <select id="deposit-resource" style="width:100%;padding:8px;margin:8px 0 16px;border-radius:8px;background:#111;color:white;border:1px solid #333;">
-        ${options}
-      </select>
-      <label>Amount</label>
-      <input id="deposit-amount" type="number"
-        placeholder="0.0" min="0" step="0.1"
-        style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;"
-      />
-    `,
-    confirmText: "Deposit",
-    onConfirm: async () => {
-      const resourceAddress = document.getElementById("deposit-resource").value.trim();
-      const amount          = document.getElementById("deposit-amount").value.trim();
-
-      if (!resourceAddress || !amount || parseFloat(amount) <= 0) {
-        console.error("Invalid deposit inputs");
-        return;
-      }
-
-      const manifest = depositManifest(resourceAddress, amount);
-      console.log("DEPOSIT MANIFEST:", manifest);
-      await sendTransaction(manifest);
-    }
-  });
-}
 // ── Emergency Modal — nivel 1: elige acción ──
 export function openEmergencyModal() {
   document.getElementById("modalTitle").innerText = "🔴 Emergency Controls";
