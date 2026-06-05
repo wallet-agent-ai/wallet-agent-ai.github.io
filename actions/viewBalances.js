@@ -19,7 +19,6 @@ async function fetchComponentBalances() {
   );
   const data = await response.json();
   const fungibles = data?.items?.[0]?.fungible_resources?.items || [];
-
   return fungibles.map(resource => {
     const metadata = resource.explicit_metadata?.items || [];
     const name     = metadata.find(m => m.key === "name")?.value?.typed?.value   || "Unknown";
@@ -29,12 +28,39 @@ async function fetchComponentBalances() {
   });
 }
 
+async function fetchComponentState() {
+  const response = await fetch(
+    `${CONFIG.GATEWAY_URL}/state/entity/details`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        addresses: [APP_STATE.componentAddress],
+      })
+    }
+  );
+  const data = await response.json();
+  const fields = data?.items?.[0]?.details?.state?.fields ?? [];
+  const getField = name => fields.find(f => f.field_name === name)?.value;
+
+  return {
+    awbResource:      getField("agent_badge_manager")      ?? "—",
+    pvobResource:     getField("owner_badge_address")      ?? "—",
+    notarizerAccount: getField("notarizer_account")        ?? "—",
+  };
+}
+
 export async function viewBalances() {
   if (!APP_STATE.componentAddress) {
     console.error("Missing componentAddress for viewBalances");
     return;
   }
-  const balances = await fetchComponentBalances();
+
+  const [balances, state] = await Promise.all([
+    fetchComponentBalances(),
+    fetchComponentState(),
+  ]);
+
   const rows = balances.length > 0
     ? balances.map(b => `
         <div style="display:flex;justify-content:space-between;align-items:center;
@@ -45,6 +71,17 @@ export async function viewBalances() {
       `).join("")
     : `<p style="color:#555;font-size:13px;text-align:center;">No assets found in agent wallet.</p>`;
 
+  const addressBlock = (label, value, type = "resource") => `
+    <div style="padding:10px;border-radius:8px;background:#0a0f1a;border:1px solid #1f2937;">
+      <p style="font-size:11px;color:#555;margin:0 0 4px;">${label}</p>
+      <p style="font-size:11px;font-family:monospace;color:#8b949e;margin:0;word-break:break-all;">${value}</p>
+      ${value !== "—" ? `
+        <a href="${CONFIG.DASHBOARD_URL}/${type}/${value}" target="_blank"
+          style="display:inline-block;margin-top:4px;font-size:11px;color:#276ff5;text-decoration:none;">
+          View on Dashboard ↗
+        </a>` : ''}
+    </div>`;
+
   const explorerUrl = `${CONFIG.DASHBOARD_URL}/component/${APP_STATE.componentAddress}`;
 
   openActionModal({
@@ -52,17 +89,26 @@ export async function viewBalances() {
     hideConfirm: true,
     content: `
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+
         ${rows}
-        <div style="margin-top:8px;padding:10px;border-radius:8px;background:#0a0f1a;border:1px solid #1f2937;">
-          <p style="font-size:11px;color:#555;margin:0 0 4px;">Component Address</p>
-          <p style="font-size:11px;font-family:monospace;color:#8b949e;margin:0;word-break:break-all;">
-            ${APP_STATE.componentAddress}
+
+        <div style="margin-top:4px;border-top:1px solid #1f2937;padding-top:8px;">
+          <p style="font-size:11px;color:#555;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.05em;">
+            Contract Info
           </p>
-          <a href="${explorerUrl}" target="_blank"
-            style="display:inline-block;margin-top:8px;font-size:12px;color:#276ff5;text-decoration:none;">
-            View on Radix Dashboard ↗
-          </a>
         </div>
+
+        ${addressBlock("Component Address", APP_STATE.componentAddress, "component")}
+        ${addressBlock("Agent Wallet Badge (AWB)", state.awbResource, "resource")}
+        ${addressBlock("Policy Vault Owner Badge (PVOB)", state.pvobResource, "resource")}
+        ${addressBlock("Notarizer Account", state.notarizerAccount, "account")}
+
+        <a href="${explorerUrl}" target="_blank"
+          style="display:inline-block;margin-top:4px;font-size:12px;color:#276ff5;
+            text-decoration:none;text-align:center;">
+          View Component on Radix Dashboard ↗
+        </a>
+
       </div>
     `,
   });

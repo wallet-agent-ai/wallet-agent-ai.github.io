@@ -153,7 +153,7 @@
 
 <!-- CONTROLS ROW 1 -->
 <!-- CONTROLS ROW 1 -->
-<section class="grid grid-3 hidden" id="controls-row-1">
+<section class="grid grid-2 hidden" id="controls-row-1">
   <div class="card card-sm" onclick="revokeBadge()">
     <h3>🔴 Revoke Badge</h3>
     <p>Invalidate the current agent badge.</p>
@@ -162,27 +162,20 @@
     <h3>🔴 Emergency</h3>
     <p>Freeze, unfreeze or withdraw all funds from the agent wallet.</p>
   </div>
-  <div class="card card-sm" onclick="addAsset()">
-    <h3>Add Asset</h3>
-    <p>Allow a new token in the agent wallet.</p>
-  </div>
 </section>
 
 
 <!-- CONTROLS ROW 2 -->
 <!-- CONTROLS ROW 2 -->
-<section class="grid grid-3 hidden" id="controls-row-2">
+<section class="grid grid-2 hidden" id="controls-row-2">
   <div class="card card-sm" onclick="viewBalances()">
     <h3>View Balances and Contract</h3>
     <p>Check current agent wallet balances.</p>
   </div>
-  <div class="card card-sm" onclick="increaseLimits()">
-    <h3>Increase Limits</h3>
-    <p>Raise spending thresholds for the agent.</p>
-  </div>
-  <div class="card card-sm" onclick="resetDailyCap()">
-    <h3>Reset Daily Cap</h3>
-    <p>Restart the daily spending counter.</p>
+  
+  <div class="card card-sm" onclick="openLimitsModal()">
+    <h3>Increase Limits or Reset Daily Cap</h3>
+    <p>Raise spending thresholds for the agent or restart the daily counter.</p>
   </div>
 </section>
 

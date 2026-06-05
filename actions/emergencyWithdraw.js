@@ -1,5 +1,4 @@
 import { APP_STATE } from "../utils/state.js";
-import { CONFIG } from "../config.js";
 import { openActionModal } from "../utils/modal.js";
 import { sendTransaction } from "./radix.js";
 
@@ -14,20 +13,19 @@ export async function emergencyWithdraw() {
     content: `
       <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px;">
         <p style="color:#c0392b;font-size:14px;margin:0;">
-          ⚠️ This will withdraw ALL funds from the contract directly to your wallet. Use only in emergency.
+          ⚠️ This will withdraw ALL funds of the selected asset from the contract directly to your wallet. Use only in emergency.
         </p>
         <div>
-          <label style="font-size:13px;color:#8b949e;">Asset to withdraw</label>
-          <select id="emergency-asset"
-            style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;box-sizing:border-box;margin-top:6px;">
-            ${CONFIG.ALLOWED_ASSETS.map(a => `<option value="${a.address}">${a.name}</option>`).join("")}
-          </select>
+          <label style="font-size:13px;color:#8b949e;">Resource Address</label>
+          <p style="font-size:12px;color:#555;margin:2px 0 6px;">Enter the resource address of the asset to withdraw.</p>
+          <input id="emergency-asset" type="text" placeholder="resource_rdx1..."
+            style="width:100%;padding:8px;border-radius:8px;background:#111;color:white;border:1px solid #333;box-sizing:border-box;font-family:monospace;font-size:12px;margin-top:6px;"/>
         </div>
       </div>
     `,
     confirmText: "Withdraw All",
     onConfirm: async () => {
-      const assetAddress = document.getElementById("emergency-asset").value;
+      const assetAddress = document.getElementById("emergency-asset").value.trim();
       if (!assetAddress) return;
 
       const account    = APP_STATE.activeAccount.address;

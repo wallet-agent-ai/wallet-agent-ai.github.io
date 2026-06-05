@@ -436,7 +436,7 @@ select {
    FOOTER
    ================================ */
 .app-footer {
-  margin-top: 60px;
+  margin-top: 20px;
   padding: 40px 30px;
   display: flex;
   justify-content: center;
@@ -513,6 +513,8 @@ select {
 
 .grid-2 {
   grid-template-columns: repeat(2, minmax(250px, 1fr));
+  padding: 10px 50px;
+  gap: 12px;
 }
 
 .grid-3 {

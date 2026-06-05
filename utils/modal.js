@@ -9,6 +9,55 @@ async function loadModal(title, file) {
   document.getElementById("howModal").classList.add("active");
 }
 
+export function openLimitsModal() {
+  openActionModal({
+    title: "Limits & Daily Cap",
+    hideConfirm: true,
+    content: `
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+        <button id="btn-increase-limits" style="padding:12px;border-radius:8px;background:#276ff5;color:white;border:none;cursor:pointer;font-size:15px;font-weight:600;">
+          📈 Increase Limits
+        </button>
+        <button id="btn-reset-daily" style="padding:12px;border-radius:8px;background:#7c4dff;color:white;border:none;cursor:pointer;font-size:15px;font-weight:600;">
+          🔄 Reset Daily Cap
+        </button>
+      </div>
+    `,
+  });
+
+  setTimeout(() => {
+    document.getElementById("btn-increase-limits")?.addEventListener("click", () => {
+      closeHow();
+      increaseLimits();
+    });
+    document.getElementById("btn-reset-daily")?.addEventListener("click", () => {
+      closeHow();
+      resetDailyCap();
+    });
+  }, 50);
+}
+
+
+export function showLoadingModal(title, message) {
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalContent").innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px 0;">
+      <div style="font-size:40px;">⏳</div>
+      <p style="color:#8b949e;font-size:14px;text-align:center;margin:0;">${message}</p>
+    </div>
+  `;
+  const closeBtn = document.querySelector("#howModal button[onclick='closeHow()']");
+  if (closeBtn) closeBtn.style.display = "none";
+  document.getElementById("howModal").classList.add("active");
+}
+
+export function restoreModal() {
+  const closeBtn = document.querySelector("#howModal button[onclick='closeHow()']");
+  if (closeBtn) closeBtn.style.display = "";
+}
+
+
+
 // ── Abre con contenido externo ──
 export function openHow()        { loadModal("How it Works",       "how.html"); }
 export function openTerms()      { loadModal("Terms & Conditions", "terms.html"); }

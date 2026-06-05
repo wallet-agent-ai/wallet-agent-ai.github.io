@@ -21,9 +21,6 @@ window.revokeBadge = revokeBadge;
 import { increaseLimits } from "./actions/increaseLimits.js";
 window.increaseLimits = increaseLimits;
 
-import { addAsset } from "./actions/addAsset.js";
-window.addAsset = addAsset;
-
 import { resetDailyCap } from "./actions/resetDailyCap.js";
 window.resetDailyCap = resetDailyCap;
 
@@ -119,7 +116,8 @@ import {
   openPrivacy, 
   closeHow, 
   closeDisclaimer,
-  openActionModal  
+  openActionModal,
+  openLimitsModal  
 } from "./utils/modal.js";
 
 // Exponer al window para los onclick del HTML
@@ -131,6 +129,8 @@ window.openPrivacy = openPrivacy;
 window.closeHow = closeHow;
 window.closeDisclaimer = closeDisclaimer;
 window.closeModal = closeHow; 
+window.openLimitsModal = openLimitsModal;
+
 
 // =========================
 // INIT TOOLKIT
