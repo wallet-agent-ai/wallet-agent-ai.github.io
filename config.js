@@ -45,8 +45,10 @@ export const CONFIG = {
   //PACKAGE_ADDRESS: "package_rdx1pke3sjgq0haza7l6vqjn020qj5n0yzqghddly6xemvn70dfwvfdavs",
   //DEV_FEE_COLLECTOR: "component_rdx1cqcwh5ed7d4evn3k7ckguntwgdng09xwrdzdn2wste354p9sx3sejw",
   //NEW
-  PACKAGE_ADDRESS: "package_rdx1pk3rlrp8cmw6sz6xgahkdp5psj45zpmly9rx6kw59fu6kkusuucpc4",
-  DEV_FEE_COLLECTOR: "component_rdx1cptuf8n6mumr5vmql2aqt9zkum7y8vulxw77vtjymddwlp5v0duxvd",
+  //PACKAGE_ADDRESS: "package_rdx1pk3rlrp8cmw6sz6xgahkdp5psj45zpmly9rx6kw59fu6kkusuucpc4",
+  //DEV_FEE_COLLECTOR: "component_rdx1cptuf8n6mumr5vmql2aqt9zkum7y8vulxw77vtjymddwlp5v0duxvd",
+  PACKAGE_ADDRESS: "package_rdx1p4a4v26630pgsurglcft0z8pznzawk2yvah8sax8vjpydxnuwxmy7h",
+  DEV_FEE_COLLECTOR: "component_rdx1cz8pqdf0vdh58qe9nwkrcs0f3h2e6xqau0t5xeyzrfg7vhpqceuvdm",
   //NFT DETECTION
   AGENT_BADGE_NAME: "AgentWallet Badge",
   AGENT_BADGE_SYMBOL: "AWB",

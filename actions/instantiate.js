@@ -136,7 +136,7 @@ async function getInstantiateDetails(intentHash) {
 function showInstantiateResult(details, notarizerAccount) {
   const envContent = `COMPONENT_ADDRESS=${details.componentAddress}
 BADGE_RESOURCE_ADDRESS=${details.agentBadgeAddress}
-BADGE_LOCAL_ID=${details.badgeLocalId}
+BADGE_LOCAL_ID="${details.badgeLocalId}"
 OWNER_BADGE_ADDRESS=${details.ownerBadgeAddress}`;
 
   openActionModal({
