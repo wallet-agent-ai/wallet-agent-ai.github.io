@@ -3,30 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgentWallet — On-chain wallet for AI agents on Radix</title>
+  <meta name="description" content="Give your AI agent programmable spending limits, whitelists and full on-chain audit trail. Deploy a PolicyVault on Radix L1 in minutes.">
 
   <!-- Favicon -->
- <link rel="icon" type="image/png" sizes="128x128" href="/logo_128x128.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/logo_128x128.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/logo_192x192.png">
   <link rel="apple-touch-icon" sizes="192x192" href="/logo_192x192.png">
-
 
   <link rel="stylesheet" href="styles.css">
 </head>
 
-
 <body>
 
-<!-- ① DISCLAIMER — arranca visible con .active -->
+<!-- ① DISCLAIMER -->
 <div class="modal active" id="disclaimer">
   <div class="modal-box">
     <img src="wallet-agent-ai.png" alt="Wallet Agent AI" class="modal-logo">
-    <h2>Disclaimer</h2>
-    <p>This dApp is experimental. Use at your own risk.<br>Always verify transactions before signing.</p>
-    <button onclick="closeDisclaimer()">Enter</button>
+    <h2>Welcome</h2>
+    <p>Secure, non-custodial wallet for Agents AI.<br>A permission layer betweeen autonomous AI and on-chain assets.</p>
+    <button onclick="closeDisclaimer()">Launch Dapp</button>
   </div>
 </div>
 
-<!-- ② HOW MODAL — arranca oculto, sin .active, caja wide -->
+<!-- ② HOW MODAL -->
 <div class="modal" id="howModal">
   <div class="modal-box wide">
     <h2 id="modalTitle"></h2>
@@ -34,7 +34,6 @@
     <button onclick="closeHow()">Close</button>
   </div>
 </div>
-
 
 <!-- HEADER -->
 <div class="top-bar">
@@ -46,10 +45,6 @@
       <span class="ai-small"> AI</span>
     </span>
   </div>
-
-
-
-
   <div class="wallet-panel">
     <radix-connect-button></radix-connect-button>
     <div class="account-selector hidden" id="account-selector-container">
@@ -59,16 +54,11 @@
   </div>
 </div>
 
-
 <!-- PENDING APPROVAL CARD -->
 <div id="pending-approval-card" class="pending-card disabled" onclick="checkAndOpenPending()">
   <span id="pending-icon">🔒</span>
   <span id="pending-text">No Pending Approvals</span>
 </div>
-
-
-
-
 
 <!-- HERO -->
 <div class="hero">
@@ -78,12 +68,64 @@
     <span class="ai">AI</span>
   </h1>
   <p class="app-subtitle">
-    Deploy and control your on-chain wallet for agents on L1 Radix network.<br>
-    Manage assets, whitelist wallets, and automate security rules.
+    Your AI agent needs to handle money.<br>
+    <strong style="color:white;">Don't give it your wallet.</strong>
   </p>
+  <p class="app-tagline">
+    Deploy an on-chain programmable wallet on Radix L1. Set spending limits, whitelist destinations,
+    and let your agent operate autonomously — within rules enforced by the contract, not by the agent.
+  </p>
+  <div class="hero-ctas">
+    <a href="https://www.npmjs.com/package/wallet-agent-ai" target="_blank" class="btn-secondary">
+      📦 npm install wallet-agent-ai
+    </a>
+    <a href="https://t.me/agent_wallet_ai_radix" target="_blank" class="btn-outline">
+      💬 Join Telegram
+    </a>
+  </div>
+  <div class="hero-badges">
+    <img src="https://img.shields.io/npm/v/wallet-agent-ai?color=276ff5&label=npm&style=flat-square" alt="npm version">
+    <img src="https://img.shields.io/badge/license-GPL3-7c4dff?style=flat-square" alt="license">
+    <img src="https://img.shields.io/badge/built%20on-Radix%20L1-00c2ff?style=flat-square" alt="Radix L1">
+    <img src="https://img.shields.io/badge/LangChain-compatible-green?style=flat-square" alt="LangChain">
+  </div>
 </div>
 
-<!-- CENTRAL CARD -->
+<!-- VALUE PROPS -->
+<section class="value-props">
+  <div class="value-card">
+    <div class="value-icon">⛓️</div>
+    <h3>On-chain enforcement</h3>
+    <p>Spending limits, whitelists and daily caps are enforced by the Radix Engine — not by your agent. If the agent tries to break the rules, the transaction is rejected at the protocol level.</p>
+  </div>
+  <div class="value-card">
+    <div class="value-icon">🔒</div>
+    <h3>Non-custodial by design</h3>
+    <p>The agent never touches your private keys. It signs transaction intents with a session badge — a non-transferable NFT that you can revoke at any time from the owner dashboard.</p>
+  </div>
+  <div class="value-card">
+    <div class="value-icon">🤖</div>
+    <h3>Any agent framework</h3>
+    <p>Works with LangChain, AutoGen, CrewAI, or any custom agent. Install the SDK, pass the tools to your agent, and it operates on Radix DeFi autonomously — transfers, swaps, staking, liquidity, lending.</p>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="capabilities">
+  <h2 class="section-title">What your agent can do</h2>
+  <div class="cap-grid">
+    <div class="cap-item">💸 <span>Transfer any Radix asset to whitelisted addresses</span></div>
+    <div class="cap-item">🔄 <span>Swap tokens via Astrolescent AGGR or your own instance</span></div>
+    <div class="cap-item">📈 <span>Place conditional orders — buy/sell at target price automatically</span></div>
+    <div class="cap-item">🥩 <span>Stake and unstake with the top 25 validators — auto-ranked by APY</span></div>
+    <div class="cap-item">💧 <span>Add and remove liquidity on Ociswap, Caviar and DefiPlaza</span></div>
+    <div class="cap-item">🏦 <span>Full WEFT Finance integration — CDP, collateral, borrow, close, burn</span></div>
+    <div class="cap-item">🌊 <span>LSU Pool liquidity — compound staking rewards with swap fees</span></div>
+    <div class="cap-item">🔍 <span>Full audit trail — every action logged on-chain with reason</span></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS CARD -->
 <div class="main-card-wrapper">
   <div class="main-card" onclick="openHow()">
     <h3>How it Works</h3>
@@ -91,39 +133,31 @@
       <a href="https://wallet.radixdlt.com" target="_blank">Install a Radix Wallet</a>
     </p>
     <div class="main-hidden">
-      
       <div class="step">
         <strong>1. On Agent — Install SDK</strong>
         <code>npm install wallet-agent-ai</code>
-        <code>npm wallet-agent init</code>
+        <code>npx agent-wallet init</code>
       </div>
-        
       <div class="step">
         <strong>2. Instantiate Contract</strong>
-        <p>Create your PolicyVault on Radix and set Name of agent and spending limits.</p>
+        <p>Create your PolicyVault on Radix and set spending limits.</p>
       </div>
-
       <div class="step">
         <strong>3. Deposit</strong>
         <p>Fund your agent wallet. Always keep some XRD for fees.</p>
       </div>
-
       <div class="step">
         <strong>4. Whitelist Wallets</strong>
         <p>Add authorized destinations. The agent can only send to listed wallets.</p>
       </div>
-
       <div class="step">
         <strong>5. More Info</strong>
         <p>Click anywhere on this box to open the full guide.</p>
       </div>
-
     </div>
   </div>
 </div>
 
-
-<!-- ACTIONS ROW 1 -->
 <!-- SETUP ROW -->
 <section class="grid grid-3" id="setup-row">
   <div class="card disabled" id="instantiate-card" onclick="instantiate()">
@@ -140,18 +174,14 @@
   </div>
 </section>
 
-
-
-<!-- OWNER CONTROL — visible hasta desbloqueo -->
+<!-- OWNER CONTROL -->
 <section class="grid grid-1" id="owner-locked">
   <div class="card disabled" id="owner-control-card">
     <h3>🔒 Owner Controls</h3>
-    <p>Complete 1 - Instantiate, 2 - Deposit and 3- Whitelist to unlock all advanced controls.</p>
+    <p>Complete 1 - Instantiate, 2 - Deposit and 3 - Whitelist to unlock all advanced controls.</p>
   </div>
 </section>
 
-
-<!-- CONTROLS ROW 1 -->
 <!-- CONTROLS ROW 1 -->
 <section class="grid grid-2 hidden" id="controls-row-1">
   <div class="card card-sm" onclick="revokeBadge()">
@@ -164,15 +194,12 @@
   </div>
 </section>
 
-
-<!-- CONTROLS ROW 2 -->
 <!-- CONTROLS ROW 2 -->
 <section class="grid grid-2 hidden" id="controls-row-2">
   <div class="card card-sm" onclick="viewBalances()">
     <h3>View Balances and Contract</h3>
     <p>Check current agent wallet balances.</p>
   </div>
-  
   <div class="card card-sm" onclick="openLimitsModal()">
     <h3>Increase Limits or Reset Daily Cap</h3>
     <p>Raise spending thresholds for the agent or restart the daily counter.</p>
@@ -183,20 +210,16 @@
 <footer class="app-footer">
   <div class="footer-column">
     <h2>Quick Links</h2>
-    <a href="https://github.com/wallet-agent-ai/wallet-agent-ai.github.io/blob/main/README.md" target="_blank">README</a>
-  <a href="/content/about.html" target="_blank" onclick="event.preventDefault(); openAbout();">About</a>
-
- <a href="https://t.me/agent_wallet_ai_radix" target="_blank">Telegram</a>
-
+    <a href="https://github.com/wallet-agent-ai/wallet-agent-ai/blob/v2.0/README.md" target="_blank">README</a>
+    <a href="/content/about.html" target="_blank" onclick="event.preventDefault(); openAbout();">About</a>
+    <a href="https://t.me/agent_wallet_ai_radix" target="_blank">Telegram</a>
   </div>
   <div class="footer-column">
     <h2>Resources</h2>
     <a href="/content/how.html" target="_blank" onclick="event.preventDefault(); openHow();">How it Works</a>
-<a href="/content/terms.html" target="_blank" onclick="event.preventDefault(); openTerms();">Terms & Conditions</a>
-<a href="/content/disclaimer.html" target="_blank" onclick="event.preventDefault(); openDisclaimer();">Disclaimer</a>
-<a href="/content/privacy.html" target="_blank" onclick="event.preventDefault(); openPrivacy();">Privacy Note</a>
-
-
+    <a href="/content/terms.html" target="_blank" onclick="event.preventDefault(); openTerms();">Terms & Conditions</a>
+    <a href="/content/disclaimer.html" target="_blank" onclick="event.preventDefault(); openDisclaimer();">Disclaimer</a>
+    <a href="/content/privacy.html" target="_blank" onclick="event.preventDefault(); openPrivacy();">Privacy Note</a>
     <a href="https://t.me/linuxx_xrd" target="_blank">Contact</a>
   </div>
   <div class="footer-column footer-logo">
@@ -205,6 +228,5 @@
 </footer>
 
 <script type="module" src="main.js"></script>
-
 </body>
 </html>

@@ -1,0 +1,590 @@
+/* ================================
+   ROOT VARIABLES
+   ================================ */
+:root {
+  --primary:       #276FF5;
+  --accent:        #276FF5;
+  --bg:            #0e1117;
+  --bg-soft:       #161b22;
+  --card:          #1c2128;
+  --text:          #e6edf3;
+  --muted:         #8b949e;
+  --border:        rgba(255,255,255,0.06);
+  --header-height: 125px;
+}
+
+/* ================================
+   BASE
+   ================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #002091 0%, #020617 100%);
+  color: var(--text);
+}
+
+/* ================================
+   HEADER / TOP BAR
+   ================================ */
+.top-bar {
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+
+  background: rgba(20, 22, 30, 0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  z-index: 1000;
+}
+
+.logo-img {
+  height: 100px;
+  width: auto;
+  padding: 10px;
+  filter: drop-shadow(0 0 12px rgba(39,111,245,0.6));
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* ================================
+   HEADER TITLE
+   ================================ */
+.header-title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.ai-small {
+  background: linear-gradient(180deg, #276ff5, #7c4dff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 22px;
+}
+
+
+
+/* ================================
+   WALLET PANEL (header right)
+   ================================ */
+.wallet-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+radix-connect-button {
+  margin-right: 5px;
+}
+
+.account-selector {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-selector label {
+  font-size: 13px;
+  opacity: 0.8;
+  color: white;
+}
+
+#account-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #111;
+  color: white;
+  border: 1px solid #333;
+  font-size: 14px;
+}
+
+/* ================================
+   HERO
+   ================================ */
+.hero {
+  padding-top: calc(var(--header-height) + 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.app-title {
+  margin: 0;
+  text-align: center;
+  font-size: 68px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+}
+
+.wallet {
+  color: #FFFFFF;
+}
+
+.agent {
+  background: linear-gradient(180deg, #276ff5, #7c4dff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ai {
+  display: block;
+  margin-top: 8px;
+  font-size: 48px;
+  text-align: center;
+  background: linear-gradient(180deg, #276ff5, #7c4dff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-subtitle {
+  text-align: center;
+  max-width: 560px;
+  margin: 22px auto 0 auto;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.2px;
+  margin-bottom: 0;
+}
+
+/* ================================
+   MAIN CARD (How it Works hover)
+   ================================ */
+.main-card-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.main-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-card:hover {
+  width: 500px;
+  padding: 25px;
+  transform: translateY(-5px);
+}
+
+.main-hidden {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.main-card:hover .main-hidden {
+  opacity: 1;
+  max-height: 600px;
+  margin-top: 15px;
+}
+
+.step {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+code {
+  display: block;
+  background: #020617;
+  padding: 6px;
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.wallet-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.wallet-link a {
+  display: inline-block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+  transition: 0.2s;
+}
+
+.wallet-link a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: var(--muted);
+  opacity: 0.5;
+  transition: 0.2s;
+}
+
+.wallet-link a:hover {
+  color: var(--accent);
+}
+
+.wallet-link a:hover::after {
+  background: var(--accent);
+  opacity: 1;
+}
+
+/* ================================
+   ACTION CARDS GRID
+   ================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 50px;
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #1f2937;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.card p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ================================
+   OWNER PANEL / DROPDOWN
+   ================================ */
+.panel {
+  text-align: center;
+  padding: 40px;
+}
+
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #1f2937;
+  color: white;
+}
+
+/* ================================
+   MODALES — sistema unificado
+   ================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9999;
+}
+
+.modal.active {
+  display: flex;
+}
+
+/* Caja base — disclaimer y alerts pequeños */
+.modal-box {
+  background: var(--card);
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+  animation: pop 0.25s ease;
+}
+
+/* Caja ancha — howModal, terms, privacy, disclaimer completo */
+.modal-box.wide {
+  max-width: 900px;
+  width: 85%;
+  text-align: left;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Botones dentro de modal */
+.modal-box button {
+  margin-top: 25px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #276ff5;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.modal-box button:hover {
+  background: #1a5fd4;
+}
+
+@keyframes pop {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+/* Logo en el disclaimer inicial */
+.modal-logo {
+  width: 320px;
+  height: auto;
+  max-width: 90%;
+  display: block;
+  margin: 0 auto 30px auto;
+  filter: drop-shadow(0 0 25px rgba(39,111,245,0.6));
+  transition: 0.2s;
+}
+
+.modal-logo:hover {
+  transform: scale(1.05);
+}
+
+/* ================================
+   CONTENIDO LEGAL (dentro de modales)
+   ================================ */
+.legal-doc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.85);
+}
+
+.legal-doc h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.legal-doc h3 {
+  margin-top: 14px;
+  font-size: 15px;
+  color: #276ff5;
+}
+
+.legal-doc p {
+  font-size: 14px;
+  margin-top: 7px;
+}
+
+.flow-box {
+  background: #020617;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: "Courier New", monospace;
+  font-size: 15px;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.85);
+  white-space: pre-line;
+  margin-top: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.how-step {
+  margin-top: 20px;
+}
+
+.how-step h3 {
+  margin-bottom: 6px;
+}
+
+/* ================================
+   FOOTER
+   ================================ */
+.app-footer {
+  margin-top: 20px;
+  padding: 40px 30px;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background: rgba(10,12,18,0.6);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-column h2 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-column a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.footer-column a:hover {
+  color: #276ff5;
+}
+
+.footer-logo {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.footer-logo-img {
+  height: 30px;
+  width: auto;
+  opacity: 0.85;
+  transition: 0.2s ease;
+}
+
+.footer-logo-img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* ================================
+   UTILIDADES
+   ================================ */
+.hidden {
+  display: none !important;
+}
+
+.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+/* ================================
+   GRID VARIANTES
+   ================================ */
+.grid-1 {
+  display: flex;
+  justify-content: center;
+  padding: 10px 50px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  padding: 10px 50px;
+  gap: 12px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  padding: 10px 50px;
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  padding: 10px 50px;
+}
+
+/* Card pequeña para controls */
+.card-sm {
+  padding: 14px 16px;
+}
+
+.card-sm h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.card-sm p {
+  font-size: 12px;
+}
+
+/* Owner locked card centrada */
+#owner-control-card {
+  max-width: 400px;
+  text-align: center;
+}
+
+/* PENDING APPROVAL CARD */
+.pending-card {
+  position: fixed;
+  top: calc(var(--header-height) + 10px);
+  right: 65px;
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+
+.pending-card.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.pending-card.active {
+  opacity: 1;
+  pointer-events: all;
+  background: rgba(255, 165, 0, 0.15);
+  border-color: orange;
+  color: orange;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,165,0,0.4); }
+  70%  { box-shadow: 0 0 0 8px rgba(255,165,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,165,0,0); }
+}
+
